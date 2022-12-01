@@ -19,15 +19,15 @@ public class EquipeController {
         return equipeService.findAll();
     }
     @PostMapping("")
-    public Equipe save(Equipe entity) {
+    public Equipe save(@RequestBody Equipe entity) {
         return equipeService.save(entity);
     }
     @GetMapping("{id}")
-    public Equipe findById(String id) {
+    public Equipe findById(@PathVariable String id) {
         return equipeService.findById(id);
     }
     @DeleteMapping("{id}")
-    public void deleteById(String id) {
+    public void deleteById(@PathVariable String id) {
         equipeService.deleteById(id);
     }
 }

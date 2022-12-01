@@ -20,17 +20,17 @@ public class CompetenceController {
     }
 
     @PostMapping("")
-    public Competence save(Competence entity) {
+    public Competence save(@RequestBody Competence entity) {
         return competenceService.save(entity);
     }
 
     @GetMapping("{id}")
-    public Competence findById(String id) {
+    public Competence findById(@PathVariable String id) {
         return competenceService.findById(id);
     }
 
     @DeleteMapping("{id}")
-    public void deleteById(String id) {
+    public void deleteById(@PathVariable String id) {
         competenceService.deleteById(id);
     }
 }
