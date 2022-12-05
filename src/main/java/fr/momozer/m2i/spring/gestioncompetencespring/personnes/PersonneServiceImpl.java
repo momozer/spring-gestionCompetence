@@ -73,4 +73,15 @@ public class PersonneServiceImpl implements PersonneService {
     public void deleteById(String id) {
         personneRepository.deleteById(id);
     }
+
+    @Override
+    public List<Personne> rechercherPersonneParCompetenceSupA(String idCompetence, Integer niveau) {
+        List<Personne> personnes = this.personneRepository.findByNiveauCompetencesCompetenceId(idCompetence);
+        return personnes.stream().filter(personne -> {
+            return personne.getNiveauCompetences().stream().anyMatch(niveauCompetence -> {
+                return niveauCompetence.getCompetence().getId().equals(idCompetence)
+                        && niveauCompetence.getNiveau()>=niveau;
+            });
+        }).toList();
+    }
 }

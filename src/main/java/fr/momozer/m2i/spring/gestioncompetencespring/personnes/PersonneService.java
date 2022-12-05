@@ -46,4 +46,12 @@ public interface PersonneService {
      * @param id de la personne
      */
     void deleteById(String id);
+
+    /**
+     * Retourne la liste des personnes possédant la compétence
+     * @param idCompetence
+     * @param niveau
+     * @return
+     */
+    List<Personne> rechercherPersonneParCompetenceSupA(String idCompetence, Integer niveau);
 }
