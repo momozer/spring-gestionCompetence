@@ -35,12 +35,11 @@ public class PersonneController {
         return personneService.addOrUpdateNiveauCompetence(idPersonne, idCompetence, niveaucompetence);
     }
 
-//    @PutMapping("{idPersonne}/competences/{idCompetence}")
-//    public Personne updateNiveauCompetence(@PathVariable String idPersonne,
-//                                           @PathVariable String idCompetence,
-//                                           @RequestParam Integer niveaucompetence){
-//        return personneService.updateNiveauCompetence(idPersonne,  idCompetence,  niveaucompetence);
-//    }
+    @GetMapping("competences/{idCompetence}")
+    public List<Personne> rechercherPersonneParCompetenceSupA(@PathVariable String idCompetence,
+                                                              @RequestParam Integer niveau){
+        return personneService.rechercherPersonneParCompetenceSupA(idCompetence, niveau);
+    }
 
     @DeleteMapping("{idPersonne}/competences/{idCompetence}")
     public void deleteNiveauCompetence(@PathVariable String idPersonne,

@@ -1,13 +1,17 @@
 package fr.momozer.m2i.spring.gestioncompetencespring.equipes;
 
+import fr.momozer.m2i.spring.gestioncompetencespring.personnes.NiveauCompetence;
 import fr.momozer.m2i.spring.gestioncompetencespring.personnes.Personne;
 import fr.momozer.m2i.spring.gestioncompetencespring.personnes.PersonneService;
+import fr.momozer.m2i.spring.gestioncompetencespring.personnes.dto.PersonneCompetenceMaxDTO;
 import org.springframework.data.mongodb.util.BsonUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EquipeServiceImp implements EquipeService{
@@ -66,5 +70,25 @@ public class EquipeServiceImp implements EquipeService{
                  break;
                  }
         }
+    }
+
+    @Override
+    public List<PersonneCompetenceMaxDTO> trouverPersonneCompetenceMax(String idEquipe) {
+        Equipe equipe = this.findById(idEquipe);
+        List<PersonneCompetenceMaxDTO> result = new ArrayList<>();
+        for (Personne personne: equipe.getMembres()) {
+            Optional<NiveauCompetence> niveauCompetence = personne.getNiveauCompetences().stream().
+                    reduce((comp1, comp2) -> {
+                        return comp1.getNiveau() > comp2.getNiveau() ? comp1 : comp2;
+                    });
+            List<NiveauCompetence> niveauCompetences = new ArrayList<>();
+            result.add(new PersonneCompetenceMaxDTO(
+                    personne.getId(),
+                    personne.getNom(),
+                    personne.getPrenom(),
+                    niveauCompetence.orElse(null).getCompetence()
+            ));
+            }
+        return result;
     }
 }

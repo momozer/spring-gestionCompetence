@@ -1,6 +1,7 @@
 package fr.momozer.m2i.spring.gestioncompetencespring.equipes;
 
 import fr.momozer.m2i.spring.gestioncompetencespring.personnes.Personne;
+import fr.momozer.m2i.spring.gestioncompetencespring.personnes.dto.PersonneCompetenceMaxDTO;
 
 import java.util.List;
 
@@ -27,4 +28,6 @@ public interface EquipeService {
      * @param idMembre id de la personne
      */
     void supprimerMembre(String idEquipe, String idMembre);
+
+    List<PersonneCompetenceMaxDTO> trouverPersonneCompetenceMax(String idEquipe);
 }
