@@ -42,29 +42,16 @@ public class PersonneServiceImpl implements PersonneService {
     }
 
     @Override
-    public Personne addNiveauCompetence(String idPersonne, String idCompetence, Integer niveau) {
+    public Personne addOrUpdateNiveauCompetence(String idPersonne, String idCompetence, Integer niveau) {
         Personne personne = this.findById(idPersonne);
         Competence competence = this.competenceService.findById(idCompetence);
-        NiveauCompetence niveauCompetence = new NiveauCompetence(competence, niveau);
-        personne.getNiveauCompetences().add(niveauCompetence);
+        List<NiveauCompetence> niveauCompetences = personne.getNiveauCompetences();
+
+        niveauCompetences.removeIf(niveauCompetence -> niveauCompetence.equals(competence));
+        niveauCompetences.add(new NiveauCompetence(competence, niveau));
         return this.save(personne);
     }
 
-    @Override
-    public Personne updateNiveauCompetence(String idPersonne, String idCompetence, Integer niveau) {
-        Personne personne = this.findById(idPersonne);
-        List<NiveauCompetence> liste = personne.getNiveauCompetences();
-        List<NiveauCompetence> listeNouvelle = new ArrayList<>();
-        for (NiveauCompetence niveauCompet : liste) {
-            if(niveauCompet.getCompetence().getId().equals(idCompetence) ) {
-                niveauCompet.setNiveau(niveau);
-            }
-            listeNouvelle.add(niveauCompet);
-        }
-        personne.setNiveauCompetences(listeNouvelle);
-        return this.save(personne);
-
-    }
 
     @Override
     public Personne deleteNiveauCompetence(String idPersonne, String idCompetence) {
