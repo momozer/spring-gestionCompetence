@@ -12,4 +12,19 @@ public interface EquipeService {
     Equipe findById(String id);
 
     void deleteById(String id);
+
+    /**
+     * Ajoute un membre (idMembre) à une équipe (idEquipe)
+     * @param idEquipe id de l'équipe
+     * @param idMembre id de la personne
+     * @return l'équipe avec les membres
+     */
+    Equipe ajoutMembre(String idEquipe, String idMembre);
+
+    /**
+     * Supprime un membre (idMembre) à une équipe (idEquipe)
+     * @param idEquipe  id de l'équipe
+     * @param idMembre id de la personne
+     */
+    void supprimerMembre(String idEquipe, String idMembre);
 }
