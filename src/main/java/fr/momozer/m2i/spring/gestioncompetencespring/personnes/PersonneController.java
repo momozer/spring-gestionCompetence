@@ -42,6 +42,12 @@ public class PersonneController {
         return personneService.updateNiveauCompetence(idPersonne,  idCompetence,  niveaucompetence);
     }
 
+    @DeleteMapping("{idPersonne}/competences/{idCompetence}")
+    public void deleteNiveauCompetence(@PathVariable String idPersonne,
+                                       @PathVariable String idCompetence) {
+        personneService.deleteNiveauCompetence(idPersonne, idCompetence);
+    }
+
     @DeleteMapping("{id}")
     public void deleteById(@PathVariable String id) {
         personneService.deleteById(id);

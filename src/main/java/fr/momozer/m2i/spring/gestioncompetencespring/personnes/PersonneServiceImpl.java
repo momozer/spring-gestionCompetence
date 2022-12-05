@@ -66,6 +66,21 @@ public class PersonneServiceImpl implements PersonneService {
 
     }
 
+    @Override
+    public Personne deleteNiveauCompetence(String idPersonne, String idCompetence) {
+        Personne personne = this.findById(idPersonne);
+        List<NiveauCompetence> liste = personne.getNiveauCompetences();
+        List<NiveauCompetence> listeNouvelle = new ArrayList<>();
+        for (NiveauCompetence niveauCompet : liste) {
+            if(niveauCompet.getCompetence().getId().equals(idCompetence) ) {
+                continue;
+            }
+            listeNouvelle.add(niveauCompet);
+        }
+        personne.setNiveauCompetences(listeNouvelle);
+        return this.save(personne);
+    }
+
 
     @Override
     public void deleteById(String id) {
