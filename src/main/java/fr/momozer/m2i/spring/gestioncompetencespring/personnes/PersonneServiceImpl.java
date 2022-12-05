@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PersonneServiceImpl implements PersonneService {
@@ -52,8 +53,17 @@ public class PersonneServiceImpl implements PersonneService {
     @Override
     public Personne updateNiveauCompetence(String idPersonne, String idCompetence, Integer niveau) {
         Personne personne = this.findById(idPersonne);
-        Competence competence = this.competenceService.findById(idCompetence);
-        NiveauCompetence niveauCompetence = new NiveauCompetence(competence, niveau);
+        List<NiveauCompetence> liste = personne.getNiveauCompetences();
+        List<NiveauCompetence> listeNouvelle = new ArrayList<>();
+        for (NiveauCompetence niveauCompet : liste) {
+            if(niveauCompet.getCompetence().getId().equals(idCompetence) ) {
+                niveauCompet.setNiveau(niveau);
+            }
+            listeNouvelle.add(niveauCompet);
+        }
+        personne.setNiveauCompetences(listeNouvelle);
+        return this.save(personne);
+
     }
 
 

@@ -12,9 +12,9 @@ public interface PersonneService {
 
     Personne findById(String id);
 
-    Personne addNiveauCompetence(String idPersonne, String idCompetence, Integer Niveau );
+    Personne addNiveauCompetence(String idPersonne, String idCompetence, Integer niveau );
 
-    Personne updateNiveauCompetence(NiveauCompetence niveauCompetence);
+    Personne updateNiveauCompetence(String idPersonne, String idCompetence, Integer niveau );
 
     void deleteById(String id);
 }

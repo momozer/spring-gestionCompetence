@@ -28,18 +28,18 @@ public class PersonneController {
         return personneService.findById(id);
     }
 
-    @PutMapping("{idPersonne}/competences/{idCompetence}")
+    @PostMapping("{idPersonne}/competences/{idCompetence}")
     public Personne addNiveauCompetence(@PathVariable String idPersonne,
                                         @PathVariable String idCompetence,
                                         @RequestParam Integer niveaucompetence){
         return personneService.addNiveauCompetence(idPersonne, idCompetence, niveaucompetence);
     }
 
-    @GetMapping("{idPersonne}/competences/{idCompetence}")
+    @PutMapping("{idPersonne}/competences/{idCompetence}")
     public Personne updateNiveauCompetence(@PathVariable String idPersonne,
                                            @PathVariable String idCompetence,
                                            @RequestParam Integer niveaucompetence){
-        return personneService.updateNiveauCompetence(idPersonne, idCompetence, niveaucompetence);
+        return personneService.updateNiveauCompetence(idPersonne,  idCompetence,  niveaucompetence);
     }
 
     @DeleteMapping("{id}")
