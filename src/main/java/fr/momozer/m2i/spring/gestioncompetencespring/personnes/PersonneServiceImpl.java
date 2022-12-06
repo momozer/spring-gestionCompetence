@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class PersonneServiceImpl implements PersonneService {
     }
     @Override
     public Personne save(Personne entity) {
+        entity.setDateModification(LocalDateTime.now());
         return personneRepository.save(entity);
     }
 
